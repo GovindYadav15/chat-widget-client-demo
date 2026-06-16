@@ -5,7 +5,6 @@ pipeline {
         REGISTRY = credentials('docker-registry-url')
         REGISTRY_CREDENTIALS = credentials('dockerhub-creds')
         IMAGE_NAME = 'wiseai-chat-widget-client'
-        COMMIT_HASH = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
     }
 
     stages {
@@ -13,6 +12,9 @@ pipeline {
             steps {
                 checkout scm
                 sh 'git pull origin dev'
+                script {
+                    env.COMMIT_HASH = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
+                }
             }
         }
 
@@ -30,7 +32,6 @@ pipeline {
             steps {
                 sh '''
                     echo "${REGISTRY_CREDENTIALS_PSW}" | docker login -u "${REGISTRY_CREDENTIALS_USR}" --password-stdin ${REGISTRY}
-                    docker push ${REGISTRY}/${IMAGE_NAME}:${COMMIT_SHA}
                     docker push ${REGISTRY}/${IMAGE_NAME}:${COMMIT_HASH}
                     docker push ${REGISTRY}/${IMAGE_NAME}:latest
                 '''
