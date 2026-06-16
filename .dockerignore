@@ -1,0 +1,29 @@
+# Git
+.git
+.gitignore
+
+# Documentation
+README.md
+*.md
+
+# IDE & OS
+.vscode
+.idea
+*.swp
+*~
+.DS_Store
+
+# Node
+node_modules
+npm-debug.log
+yarn-error.log
+
+# CI/CD
+.github
+.gitlab-ci.yml
+Jenkinsfile
+
+# Misc
+.env
+.env.local
+.cache
