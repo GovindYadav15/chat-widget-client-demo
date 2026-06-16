@@ -48,12 +48,4 @@ pipeline {
         }
     }
 
-    post {
-        always {
-            sh 'docker logout ${REGISTRY} || true'
-        }
-        success {
-            sh 'docker compose ps'
-        }
-    }
 }
