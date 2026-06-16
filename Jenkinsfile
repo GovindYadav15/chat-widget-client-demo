@@ -1,13 +1,10 @@
 pipeline {
-    agent {
-        label 'oem-agent'
-    }
+    agent any
 
     environment {
         REGISTRY = credentials('docker-registry-url')
         REGISTRY_CREDENTIALS = credentials('dockerhub-creds')
         IMAGE_NAME = 'wiseai-chat-widget-client'
-        COMMIT_SHA = sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
         COMMIT_HASH = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
     }
 
@@ -23,7 +20,6 @@ pipeline {
             steps {
                 sh '''
                     docker build -t ${IMAGE_NAME}:latest .
-                    docker tag ${IMAGE_NAME}:latest ${REGISTRY}/${IMAGE_NAME}:${COMMIT_SHA}
                     docker tag ${IMAGE_NAME}:latest ${REGISTRY}/${IMAGE_NAME}:${COMMIT_HASH}
                     docker tag ${IMAGE_NAME}:latest ${REGISTRY}/${IMAGE_NAME}:latest
                 '''
