@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        REGISTRY = credentials('docker-registry-url')
+        REGISTRY = credentials('dockerhub-creds').REGISTRY_URL
         REGISTRY_CREDENTIALS = credentials('dockerhub-creds')
         IMAGE_NAME = 'wiseai-chat-widget-client'
     }
