@@ -11,7 +11,6 @@ pipeline {
         stage('Checkout') {
             steps {
                 checkout scm
-                sh 'git pull origin dev'
                 script {
                     env.COMMIT_HASH = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
                 }
@@ -42,9 +41,9 @@ pipeline {
             steps {
                 sh '''
                     docker pull ${REGISTRY}/${IMAGE_NAME}:latest
-                    docker-compose down || true
+                    docker compose down || true
                     docker rm -f wiseai-chat-widget-client || true
-                    docker-compose up -d
+                    docker compose up -d
                 '''
             }
         }
