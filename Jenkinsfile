@@ -1,10 +1,5 @@
 pipeline {
     agent any
-    environment {
-        REGISTRY_CREDENTIALS = credentials('dockerhub-creds')
-        REGISTRY = 'docker.io/robert803556'
-        IMAGE_NAME = 'wiseai-chat-widget-client'
-    }
 
     stages {
 
@@ -12,7 +7,7 @@ pipeline {
             when { branch 'dev' }
             agent { label 'mirage-agent' }
             steps {
-                echo "Checking out branch: ${env.BRANCH_NAME}"
+
                 echo "Running DEV stage on branch: ${env.BRANCH_NAME}"
           }
         }
