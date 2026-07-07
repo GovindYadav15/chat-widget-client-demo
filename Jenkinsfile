@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent none
 
     stages {
 
@@ -24,7 +24,6 @@ pipeline {
 
         stage('Prod') {
             when { branch 'prod' }
-            agent { label 'pragyan-agent' }
             steps {
                 echo "This is the PROD stage. You are on the ${env.BRANCH_NAME} branch."
                 echo "Running PROD stage on branch: ${env.BRANCH_NAME}"
