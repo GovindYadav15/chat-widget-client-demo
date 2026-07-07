@@ -1,5 +1,11 @@
 pipeline {
-    agent none
+    agent any
+    environment {
+        REGISTRY_CREDENTIALS = credentials('dockerhub-creds')
+        REGISTRY = 'docker.io/robert803556'
+        IMAGE_NAME = 'wiseai-chat-widget-client'
+    }
+
     stages {
 
         stage('Dev') {
@@ -25,7 +31,7 @@ pipeline {
             when { branch 'prod' }
             agent { label 'pragyan-agent' }
             steps {
-
+                echo "This is the PROD stage. You are on the ${env.BRANCH_NAME} branch."
                 echo "Running PROD stage on branch: ${env.BRANCH_NAME}"
             }
         }
