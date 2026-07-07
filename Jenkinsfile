@@ -1,5 +1,11 @@
 pipeline {
-    agent none
+    agent any
+    environment {
+        REGISTRY_CREDENTIALS = credentials('dockerhub-creds')
+        REGISTRY = 'docker.io/robert803556'
+        IMAGE_NAME = 'wiseai-chat-widget-client'
+    }
+
     stages {
 
         stage('Dev') {
