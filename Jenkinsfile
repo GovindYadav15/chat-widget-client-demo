@@ -1,6 +1,5 @@
 pipeline {
     agent any
-
     environment {
         REGISTRY_CREDENTIALS = credentials('dockerhub-creds')
         REGISTRY = 'docker.io/robert803556'
