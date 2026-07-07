@@ -6,7 +6,7 @@ pipeline {
             when { branch 'dev' }
             agent { label 'mirage-agent' }
             steps {
-
+                echo "Checking out branch: ${env.BRANCH_NAME}"
                 echo "Running DEV stage on branch: ${env.BRANCH_NAME}"
           }
         }
